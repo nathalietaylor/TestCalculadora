@@ -32,7 +32,6 @@ public class CalculadoraOnlineSomaTest {
     public void somaDoisInteirosTest() {
         // Localizando os elementos de entrada
         WebElement inputNumero1 = driver.findElement(By.id("calc1_resultat"));
-        WebElement botaoUm = driver.findElement(By.xpath("//input[@value='1']"));
         WebElement botaoSoma = driver.findElement(By.xpath("//input[@value='+']"));
         WebElement botaoIgual = driver.findElement(By.xpath("//input[@value='=']"));
 
@@ -58,7 +57,6 @@ public class CalculadoraOnlineSomaTest {
     public void somaZeroTest() {
         // Localizando os elementos de entrada
         WebElement inputNumero1 = driver.findElement(By.id("calc1_resultat"));
-        WebElement botaoUm = driver.findElement(By.xpath("//input[@value='1']"));
         WebElement botaoSoma = driver.findElement(By.xpath("//input[@value='+']"));
         WebElement botaoIgual = driver.findElement(By.xpath("//input[@value='=']"));
 
