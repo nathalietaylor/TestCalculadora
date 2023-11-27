@@ -29,14 +29,14 @@ public class CalculadoraOnlineSomaTest {
     @Test
     public void somaDoisInteirosTest() {
         // Localizando os elementos de entrada
-        WebElement inputNumero1 = driver.findElement(By.id("calc1_resultat"));
+        WebElement inputNumero = driver.findElement(By.id("calc1_resultat"));
         WebElement botaoSoma = driver.findElement(By.xpath("//input[@value='+']"));
         WebElement botaoIgual = driver.findElement(By.xpath("//input[@value='=']"));
 
         // Executando a operação 1 + 1
-        inputNumero1.sendKeys("1");
+        inputNumero.sendKeys("1");
         botaoSoma.click();
-        inputNumero1.sendKeys("1");
+        inputNumero.sendKeys("1");
         botaoIgual.click();
 
         // Aguardando um curto período para exibir o resultado
@@ -54,14 +54,14 @@ public class CalculadoraOnlineSomaTest {
     @Test
     public void somaZeroTest() {
         // Localizando os elementos de entrada
-        WebElement inputNumero1 = driver.findElement(By.id("calc1_resultat"));
+        WebElement inputNumero = driver.findElement(By.id("calc1_resultat"));
         WebElement botaoSoma = driver.findElement(By.xpath("//input[@value='+']"));
         WebElement botaoIgual = driver.findElement(By.xpath("//input[@value='=']"));
 
-        // Executando a operação 1 + 1
-        inputNumero1.sendKeys("9");
+        // Executando a operação 9 + 0 
+        inputNumero.sendKeys("9");
         botaoSoma.click();
-        inputNumero1.sendKeys("0");
+        inputNumero.sendKeys("0");
         botaoIgual.click();
 
         // Aguardando um curto período para exibir o resultado
@@ -76,7 +76,66 @@ public class CalculadoraOnlineSomaTest {
         assertEquals("9", resultado.getAttribute("value"));
     }
 
+    @Test
+    public void somaNegativosTest() {
+        // Localizando os elementos de entrada
+        WebElement inputNumero = driver.findElement(By.id("calc1_resultat"));
+        WebElement botaoSoma = driver.findElement(By.xpath("//input[@value='+']"));
+        WebElement botaoIgual = driver.findElement(By.xpath("//input[@value='=']"));
+        WebElement botaoNegativo = driver.findElement(By.xpath("//input[@value='±']"));
 
+        // Executando a operação -2 + -2
+        inputNumero.sendKeys("2");
+        botaoNegativo.click();
+        botaoSoma.click();
+        inputNumero.sendKeys("2");
+        botaoNegativo.click();
+        botaoIgual.click();
+
+        // Aguardando um curto período para exibir o resultado
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Verificando o resultado
+        WebElement resultado = driver.findElement(By.id("calc1_resultat"));
+        assertEquals("-4", resultado.getAttribute("value"));
+    }
+
+    @Test
+    public void somaFloatTest() {
+        // Localizando os elementos de entrada e botões
+        WebElement botaoNumero1 = driver.findElement(By.xpath("//input[@value='1']"));
+        WebElement botaoPontoDecimal = driver.findElement(By.xpath("//input[@value=',']"));
+        WebElement botaoNumero5 = driver.findElement(By.xpath("//input[@value='5']"));
+        WebElement botaoSoma = driver.findElement(By.xpath("//input[@value='+']"));
+        WebElement botaoNumero2 = driver.findElement(By.xpath("//input[@value='2']"));
+        WebElement botaoIgual = driver.findElement(By.xpath("//input[@value='=']"));
+        WebElement botaoNumero6 = driver.findElement(By.xpath("//input[@value='6']"));
+        // Executando a operação: 1.5 + 2.6
+        botaoNumero1.click();
+        botaoPontoDecimal.click();
+        botaoNumero5.click();
+        botaoSoma.click();
+        botaoNumero2.click();
+        botaoPontoDecimal.click();
+        botaoNumero6.click();
+        botaoIgual.click();
+
+        // Aguardando um curto período para exibir o resultado
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Verificando o resultado
+        WebElement resultado = driver.findElement(By.id("calc1_resultat"));
+        assertEquals("4.1", resultado.getAttribute("value"));
+    }
+
+    
     @After
     public void tearDown() {
         System.out.println("TearDown");
